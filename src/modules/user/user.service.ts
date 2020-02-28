@@ -1,29 +1,29 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 import { UserEntity } from './user.entity';
-import { CreateUserDto, FindUserDto } from './dto';
+import { JwtService } from './jwt.service';
+import { UserRepository } from './user.repository';
+import { SignupDto, LoginDto, FindUserDto } from './dto';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>
-  ) {}
+  constructor(private readonly userRepository: UserRepository, private readonly jwtService: JwtService) {}
 
-  async findAll(): Promise<{ users: UserEntity[]; count: number }> {
-    const [users, count] = await this.userRepository.findAndCount();
-    return { users, count };
+  findManyBy(): Promise<{ users: UserEntity[]; count: number }> {
+    return this.userRepository.findManyBy();
   }
 
-  async findOne(where: FindUserDto): Promise<UserEntity | undefined> {
-    const user = await this.userRepository.findOne({ where });
-    return user;
+  findOneBy(criteria: FindUserDto): Promise<UserEntity | undefined> {
+    return this.userRepository.findOneBy(criteria);
   }
 
-  async create(userParams: CreateUserDto): Promise<UserEntity | undefined> {
-    const user = await this.userRepository.save(userParams);
-    return user;
+  signup(signupDto: SignupDto): Promise<UserEntity> {
+    return this.userRepository.signup(signupDto);
+  }
+
+  async login(loginDto: LoginDto): Promise<string> {
+    const user = await this.userRepository.validateUserPassword(loginDto);
+    if (user) return this.jwtService.encode(user);
+    throw new Error('not valid credentials');
   }
 }

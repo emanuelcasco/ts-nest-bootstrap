@@ -29,6 +29,7 @@ const config = {
     database: process.env.DB_NAME || 'database',
     type: 'postgres',
     autoLoadEntities: true,
+    entities: [generatePath('./modules/**/*.{js,ts}')],
     cli: {
       migrationsDir: generatePath('./migrations/migrations')
     }
@@ -40,7 +41,7 @@ const config = {
     port: process.env.PORT
   },
   session: {
-    header_name: 'authorization',
+    header_name: 'Authorization',
     secret: process.env.SESSION_SECRET as string
   },
   todosExternalApi: {

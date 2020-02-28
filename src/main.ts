@@ -3,9 +3,7 @@ import { AppModule } from './app.module';
 import config from './config';
 
 async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(AppModule, {
-    logger: true
-  });
+  const app = await NestFactory.create(AppModule);
   await app.listen(config.common.port);
 }
 
