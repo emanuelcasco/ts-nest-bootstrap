@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
 import { UserEntity } from './user.entity';
-import { JwtService } from './jwt.service';
 import { UserRepository } from './user.repository';
 import { SignupDto, LoginDto, FindUserDto } from './dto';
+
+import { JwtService } from '../shared/jwt.service';
 
 @Injectable()
 export class UserService {
