@@ -8,15 +8,8 @@ const SALT_ROUNDS = 10;
 
 @EntityRepository(UserEntity)
 export class UserRepository extends Repository<UserEntity> {
-  async findManyBy(): Promise<{ users: UserEntity[]; count: number }> {
-    const [users, count] = await this.findAndCount({
-      select: ['id', 'email', 'firstName', 'lastName', 'username']
-    });
-    return { users, count };
-  }
-
-  async findOneBy(criteria: FindUserDto): Promise<UserEntity | undefined> {
-    const user = await this.findOne({ where: criteria });
+  async findBy(findDto: FindUserDto): Promise<UserEntity | undefined> {
+    const user = await this.findOne({ where: findDto });
     return user;
   }
 

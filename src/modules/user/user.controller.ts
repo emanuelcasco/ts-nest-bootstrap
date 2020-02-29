@@ -1,9 +1,9 @@
-import { Body, Controller, Post, UsePipes, ValidationPipe, Res } from '@nestjs/common';
+import { Body, Controller, Post, UsePipes, ValidationPipe, Res, Get } from '@nestjs/common';
 import { Response } from 'express';
 
 import { UserService } from './user.service';
 import { UserEntity } from './user.entity';
-import { SignupDto, LoginDto } from './dto';
+import { SignupDto, LoginDto, FindUserDto } from './dto';
 
 import config from '../../config';
 
@@ -12,6 +12,12 @@ const SESSION_HEADER_NAME = config.session.header_name;
 @Controller('user')
 export class UserController {
   constructor(private readonly userServie: UserService) {}
+
+  @Get('/:id')
+  @UsePipes(ValidationPipe)
+  findById(@Body() findDto: FindUserDto): Promise<UserEntity | undefined> {
+    return this.userServie.findById(findDto);
+  }
 
   @Post('/signup')
   @UsePipes(ValidationPipe)

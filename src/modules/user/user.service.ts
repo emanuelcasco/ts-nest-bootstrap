@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, NotFoundException } from '@nestjs/common';
 
 import { UserEntity } from './user.entity';
 import { UserRepository } from './user.repository';
@@ -10,12 +10,10 @@ import { JwtService } from '../shared/jwt.service';
 export class UserService {
   constructor(private readonly userRepository: UserRepository, private readonly jwtService: JwtService) {}
 
-  findManyBy(): Promise<{ users: UserEntity[]; count: number }> {
-    return this.userRepository.findManyBy();
-  }
-
-  findOneBy(criteria: FindUserDto): Promise<UserEntity | undefined> {
-    return this.userRepository.findOneBy(criteria);
+  async findById(findDto: FindUserDto): Promise<UserEntity> {
+    const user = await this.userRepository.findBy(findDto);
+    if (!user) throw new NotFoundException();
+    return user;
   }
 
   signup(signupDto: SignupDto): Promise<UserEntity> {
@@ -25,6 +23,6 @@ export class UserService {
   async login(loginDto: LoginDto): Promise<string> {
     const user = await this.userRepository.validateUserPassword(loginDto);
     if (user) return this.jwtService.encode(user);
-    throw new UnauthorizedException('not valid credentials');
+    throw new UnauthorizedException('E-mail/password is invalid');
   }
 }
