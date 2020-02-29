@@ -20,9 +20,9 @@ export class UserRepository extends Repository<UserEntity> {
     return user;
   }
 
-  async signup(user: SignupDto): Promise<UserEntity> {
-    const encryptedPassword = await this.hashPassword(user.password);
-    return this.save({ ...user, password: encryptedPassword });
+  async signup(signupDto: SignupDto): Promise<UserEntity> {
+    const encryptedPass = await this.hashPassword(signupDto.password);
+    return this.save({ ...signupDto, password: encryptedPass });
   }
 
   async validateUserPassword(credentials: LoginDto): Promise<UserEntity | null> {

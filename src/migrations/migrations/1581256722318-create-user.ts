@@ -11,7 +11,9 @@ export class UserModel1574858958271 implements MigrationInterface {
           { name: 'first_name', type: 'varchar' },
           { name: 'last_name', type: 'varchar' },
           { name: 'email', type: 'varchar' },
-          { name: 'password', type: 'varchar' }
+          { name: 'password', type: 'varchar' },
+          { name: 'created_at', type: 'timestamp', default: 'NOW()' },
+          { name: 'updated_at', type: 'timestamp', default: 'NOW()' }
         ]
       })
     );

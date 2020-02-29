@@ -8,6 +8,7 @@ const generatePath = (pathToResolve: string): string => path.join(__dirname, pat
 
 const typeOrmConfig = {
   ...config.database,
+  logging: true,
   entities: [generatePath('../modules/**/*.entity.{js,ts}')],
   migrations: [generatePath('../migrations/migrations/*.{js,ts}')],
   subscribers: [generatePath('../modules/**/*.subscriber.{js,ts}')],
