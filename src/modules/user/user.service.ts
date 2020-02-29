@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 import { UserEntity } from './user.entity';
 import { UserRepository } from './user.repository';
@@ -25,6 +25,6 @@ export class UserService {
   async login(loginDto: LoginDto): Promise<string> {
     const user = await this.userRepository.validateUserPassword(loginDto);
     if (user) return this.jwtService.encode(user);
-    throw new Error('not valid credentials');
+    throw new UnauthorizedException('not valid credentials');
   }
 }
