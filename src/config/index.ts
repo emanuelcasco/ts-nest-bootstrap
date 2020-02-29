@@ -1,5 +1,3 @@
-import path from 'path';
-
 import { deepMerge } from '../utils';
 import { ENVIRONMENTS } from '../constants';
 
@@ -14,8 +12,6 @@ if (ENVIRONMENT !== ENVIRONMENTS.PRODUCTION) {
 const configFile = `./${ENVIRONMENT}`;
 const environmentConfig = require(configFile).config;
 
-const generatePath = (pathToResolve: string): string => path.join(__dirname, '..', pathToResolve);
-
 const config = {
   environment: ENVIRONMENT,
   common: {
@@ -27,12 +23,7 @@ const config = {
     username: process.env.DB_USERNAME || 'username',
     password: process.env.DB_PASSWORD || 'password',
     database: process.env.DB_NAME || 'database',
-    type: 'postgres',
-    autoLoadEntities: true,
-    entities: [generatePath('./modules/**/*.{js,ts}')],
-    cli: {
-      migrationsDir: generatePath('./migrations/migrations')
-    }
+    type: 'postgres'
   },
   api: {
     prefix: '/',

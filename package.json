@@ -9,6 +9,10 @@
     "build": "nest build",
     "docs": "npx compodoc -p tsconfig.json -s",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "migrations-create": "npm run typeorm-cli -- migration:create -d src/migrations/migrations -n",
+    "migrations-generate": "npm run typeorm-cli -- migration:generate --config src/config/db.ts -n",
+    "migrations-run": "npm run typeorm-cli -- migration:run --config src/config/db.ts",
+    "migrations-undo": "npm run typeorm-cli -- migration:revert --config src/config/db.ts",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -18,7 +22,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "typeorm-cli": "ts-node-dev ./node_modules/.bin/typeorm"
   },
   "dependencies": {
     "@nestjs/common": "^6.10.14",
@@ -66,6 +71,7 @@
     "ts-jest": "^24.3.0",
     "ts-loader": "^6.2.1",
     "ts-node": "^8.6.0",
+    "ts-node-dev": "^1.0.0-pre.44",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.7.4"
   }
