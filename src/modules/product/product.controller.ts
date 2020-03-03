@@ -1,16 +1,18 @@
-import { Controller, Post, Get, Param, Body } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, Query } from '@nestjs/common';
 
 import { ProductService } from './product.service';
 import { ProductEntity } from './product.entity';
 import { CreateProductDto } from './dto';
+
+import { ListQueryDto, ListDto } from '../shared/dto';
 
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get()
-  findAndCountAll(): Promise<{ products: ProductEntity[]; count: number }> {
-    return this.productService.findAndCount();
+  findAndCountAll(@Query() queryparams: ListQueryDto): Promise<ListDto<ProductEntity>> {
+    return this.productService.findAndCount(queryparams);
   }
 
   @Get('/:id')

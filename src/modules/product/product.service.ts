@@ -5,15 +5,19 @@ import { Repository } from 'typeorm';
 import { ProductEntity } from './product.entity';
 import { CreateProductDto, FindProductDto } from './dto';
 
+import { ListQueryDto, ListDto } from '../shared/dto';
+import { paginateParams } from '../shared/paginate.helper';
+
 @Injectable()
 export class ProductService {
   constructor(
     @InjectRepository(ProductEntity) private readonly productRepository: Repository<ProductEntity>
   ) {}
 
-  async findAndCount(): Promise<{ products: ProductEntity[]; count: number }> {
-    const [products, count] = await this.productRepository.findAndCount();
-    return { products, count };
+  async findAndCount(query: ListQueryDto): Promise<ListDto<ProductEntity>> {
+    const { skip, take, page } = paginateParams(query.page, query.limit);
+    const [records, count] = await this.productRepository.findAndCount({ skip, take });
+    return { records, count, page, limit: take };
   }
 
   async findOneBy(findDto: FindProductDto): Promise<ProductEntity> {
