@@ -11,7 +11,11 @@ export class JwtService {
     return jwt.encode(payload, SECRET);
   }
 
-  decode<T>(token: string): T {
-    return jwt.decode(token, SECRET);
+  decode<T>(token: string): T | null {
+    try {
+      return jwt.decode(token, SECRET);
+    } catch (error) {
+      return null;
+    }
   }
 }

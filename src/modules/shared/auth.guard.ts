@@ -11,17 +11,21 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest<Request>();
-    req.user = await this.authorize(req);
-    return true;
-  }
 
-  private async authorize(req: Request): Promise<UserEntity> {
+    /**
+     * Take JWT from Authorization header
+     */
     const token = req.header('Authorization');
     if (!token) throw new UnauthorizedException('Token is empty');
 
+    /**
+     * Decode JWT<UserEntity> and persist it on request
+     */
     const decoded = await this.jwtService.decode<UserEntity>(token);
     if (!decoded) throw new UnauthorizedException('Token provided was not valid');
 
-    return decoded;
+    req.locals = { user: decoded };
+
+    return true;
   }
 }

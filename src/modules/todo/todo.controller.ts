@@ -14,6 +14,7 @@ export class TodoController {
   }
 
   @Get('/:id')
+  @UseGuards(AuthGuard)
   findById(@Param('id') id: number): Promise<Todo> {
     return this.todoService.findById(id);
   }

@@ -21,8 +21,12 @@ const getConstraints = (error: ValidationError): CustomBadRequestError => ({
   children: error.children.map(getConstraints)
 });
 
-const getErrorMessage = (errors: ValidationError[]): CustomBadRequestError[] | null =>
-  Array.isArray(errors) && errors.length ? errors.map(getConstraints) : null;
+const getErrorMessage = (details: ValidationError[] | string): CustomBadRequestError[] | string => {
+  if (Array.isArray(details)) {
+    return details.map(getConstraints);
+  }
+  return details;
+};
 
 /**
  * Catch errors and serialize
@@ -33,8 +37,9 @@ export class HttpErrorFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
+    const status =
+      typeof exception.getStatus === 'function' ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    const status = exception.getStatus() || HttpStatus.INTERNAL_SERVER_ERROR;
     const errorResponse = {
       message: exception?.message?.error || HttpStatus.INTERNAL_SERVER_ERROR,
       details: getErrorMessage(exception?.message?.message)
