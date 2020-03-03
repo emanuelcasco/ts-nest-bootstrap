@@ -6,7 +6,7 @@ import { ListEntity } from './list.entity';
 import { CreateListDto, FindListDto } from './dto';
 
 import { ListQueryDto, ListDto } from '../shared/dto';
-import { paginateParams } from '../shared/paginate.helper';
+import { paginateParams } from '../shared/helpers';
 
 @Injectable()
 export class ListService {

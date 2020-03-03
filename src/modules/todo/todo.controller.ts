@@ -1,7 +1,7 @@
 import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 
 import { TodoService, Todo } from './todo.service';
-import { AuthGuard } from '../shared/auth.guard';
+import { AuthGuard } from '../shared/guards';
 
 @Controller('todo')
 export class TodoController {

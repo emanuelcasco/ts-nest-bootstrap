@@ -6,7 +6,7 @@ import { CategoryEntity } from './category.entity';
 import { CreateCategoryDto, FindCategoryDto } from './dto';
 
 import { ListQueryDto, ListDto } from '../shared/dto';
-import { paginateParams } from '../shared/paginate.helper';
+import { paginateParams } from '../shared/helpers';
 
 @Injectable()
 export class CategoryService {

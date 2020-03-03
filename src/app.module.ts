@@ -2,8 +2,8 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { HttpErrorFilter } from './modules/shared/http-error.filter';
-import { LoggingInterceptor } from './modules/shared/logging.interceptor';
+import { HttpErrorFilter } from './modules/shared/filters';
+import { LoggingInterceptor } from './modules/shared/interceptors';
 
 import { HealthModule } from './modules/health/health.module';
 import { ProductModule } from './modules/product/product.module';

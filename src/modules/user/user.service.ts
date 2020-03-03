@@ -4,7 +4,7 @@ import { UserEntity } from './user.entity';
 import { UserRepository } from './user.repository';
 import { SignupDto, LoginDto, FindUserDto } from './dto';
 
-import { JwtService } from '../shared/jwt.service';
+import { JwtService } from '../shared/services';
 
 @Injectable()
 export class UserService {

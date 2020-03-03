@@ -4,7 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './user.controller';
 import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
-import { JwtService } from '../shared/jwt.service';
+
+import { JwtService } from '../shared/services';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserRepository])],

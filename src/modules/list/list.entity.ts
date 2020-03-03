@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToMany, JoinTable } from 'typeorm';
 
-import { BaseEntity } from '../shared/base.entity';
+import { BaseEntity } from '../shared/entities';
 import { ProductEntity } from '../product/product.entity';
 
 @Entity({ name: 'lists' })

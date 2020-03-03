@@ -5,7 +5,7 @@ import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
 import { ProductEntity } from './product.entity';
 
-import { JwtService } from '../shared/jwt.service';
+import { JwtService } from '../shared/services';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ProductEntity])],

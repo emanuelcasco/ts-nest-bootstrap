@@ -5,7 +5,7 @@ import { CategoryController } from './category.controller';
 import { CategoryService } from './category.service';
 import { CategoryEntity } from './category.entity';
 
-import { JwtService } from '../shared/jwt.service';
+import { JwtService } from '../shared/services';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CategoryEntity])],

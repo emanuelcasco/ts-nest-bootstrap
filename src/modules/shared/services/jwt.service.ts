@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import jwt from 'jwt-simple';
 
-import config from '../../config';
+import config from '../../../config';
 
 const SECRET = config.session.secret;
 

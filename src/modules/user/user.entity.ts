@@ -1,6 +1,6 @@
 import { Column, Entity } from 'typeorm';
 
-import { BaseEntity } from '../shared/base.entity';
+import { BaseEntity } from '../shared/entities';
 
 @Entity({ name: 'users' })
 export class UserEntity extends BaseEntity {
