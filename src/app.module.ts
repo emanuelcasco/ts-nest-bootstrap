@@ -6,6 +6,8 @@ import { HttpErrorFilter } from './modules/shared/http-error.filter';
 import { LoggingInterceptor } from './modules/shared/logging.interceptor';
 
 import { HealthModule } from './modules/health/health.module';
+import { ProductModule } from './modules/product/product.module';
+import { CategoryModule } from './modules/category/category.module';
 import { TodoModule } from './modules/todo/todo.module';
 import { UserModule } from './modules/user/user.module';
 
@@ -16,6 +18,8 @@ import databaseConfig from './config/db';
     TypeOrmModule.forRootAsync({
       useFactory: () => databaseConfig
     }),
+    CategoryModule,
+    ProductModule,
     HealthModule,
     TodoModule,
     UserModule
