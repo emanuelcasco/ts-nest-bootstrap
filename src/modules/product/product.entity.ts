@@ -15,7 +15,10 @@ export class ProductEntity extends BaseEntity {
   )
   lists: ListEntity[];
 
-  @ManyToOne(() => CategoryEntity, { cascade: true })
+  @ManyToOne(() => CategoryEntity)
   @JoinColumn({ name: 'category_id' })
   category: CategoryEntity;
+
+  @Column({ name: 'category_id', nullable: true })
+  categoryId?: number;
 }
