@@ -6,7 +6,7 @@ import { CategoryEntity } from '../category/category.entity';
 
 @Entity({ name: 'products' })
 export class ProductEntity extends BaseEntity {
-  @Column('varchar', { unique: true })
+  @Column('varchar')
   name: string;
 
   @ManyToMany(

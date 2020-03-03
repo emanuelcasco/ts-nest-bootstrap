@@ -5,7 +5,7 @@ import { ProductEntity } from '../product/product.entity';
 
 @Entity({ name: 'lists' })
 export class ListEntity extends BaseEntity {
-  @Column('varchar', { unique: true })
+  @Column('varchar')
   name: string;
 
   @ManyToMany(() => ProductEntity, { cascade: true })

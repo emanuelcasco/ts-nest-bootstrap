@@ -1,12 +1,9 @@
-import { IsNumberString, IsString } from 'class-validator';
+import { IsNumberString, IsString, IsOptional } from 'class-validator';
 
 export class ListQueryDto {
-  @IsNumberString()
-  page?: number;
+  @IsNumberString() @IsOptional() page?: number;
 
-  @IsNumberString()
-  limit?: number;
+  @IsNumberString() @IsOptional() limit?: number;
 
-  @IsString()
-  query?: string;
+  @IsString() @IsOptional() query?: string;
 }

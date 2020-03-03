@@ -8,6 +8,7 @@ import { LoggingInterceptor } from './modules/shared/logging.interceptor';
 import { HealthModule } from './modules/health/health.module';
 import { ProductModule } from './modules/product/product.module';
 import { CategoryModule } from './modules/category/category.module';
+import { ListModule } from './modules/list/list.module';
 import { TodoModule } from './modules/todo/todo.module';
 import { UserModule } from './modules/user/user.module';
 
@@ -22,6 +23,7 @@ import databaseConfig from './config/db';
     ProductModule,
     HealthModule,
     TodoModule,
+    ListModule,
     UserModule
   ],
   providers: [

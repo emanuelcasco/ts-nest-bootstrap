@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UsePipes, ValidationPipe, Res, Get } from '@nestjs/common';
+import { Body, Controller, Post, Res, Get } from '@nestjs/common';
 import { Response } from 'express';
 
 import { UserService } from './user.service';
@@ -14,19 +14,16 @@ export class UserController {
   constructor(private readonly userServie: UserService) {}
 
   @Get('/:id')
-  @UsePipes(ValidationPipe)
   findById(@Body() findDto: FindUserDto): Promise<UserEntity | undefined> {
     return this.userServie.findById(findDto);
   }
 
   @Post('/signup')
-  @UsePipes(ValidationPipe)
   signup(@Body() signupDto: SignupDto): Promise<UserEntity | undefined> {
     return this.userServie.signup(signupDto);
   }
 
   @Post('/login')
-  @UsePipes(ValidationPipe)
   async login(@Body() loginDto: LoginDto, @Res() res: Response): Promise<Response> {
     const token = await this.userServie.login(loginDto);
     res.set(SESSION_HEADER_NAME, token);
