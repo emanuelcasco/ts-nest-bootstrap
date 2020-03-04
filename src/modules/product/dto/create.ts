@@ -5,6 +5,10 @@ export class CreateProductDto {
   @IsNotEmpty()
   name: string;
 
+  @IsString()
+  @IsNotEmpty()
+  unit: string;
+
   @IsNumber()
   categoryId?: number;
 }

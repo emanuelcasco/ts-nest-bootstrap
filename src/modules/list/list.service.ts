@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { ListEntity } from './list.entity';
-import { CreateListDto, FindListDto } from './dto';
+import { CreateListDto, FindListDto, UpdateListDto } from './dto';
 
 import { ListQueryDto, ListDto } from '../shared/dto';
 import { paginateParams } from '../shared/helpers';
@@ -19,13 +19,22 @@ export class ListService {
   }
 
   async findOneBy(findDto: FindListDto): Promise<ListEntity> {
-    const list = await this.listRepository.findOne({ where: findDto, relations: ['products'] });
+    const list = await this.listRepository.findOne({
+      where: findDto,
+      relations: ['items', 'items.product']
+    });
     if (!list) throw new NotFoundException();
     return list;
   }
 
   async create(createDto: CreateListDto): Promise<ListEntity> {
-    const product = await this.listRepository.save(createDto);
-    return product;
+    const list = await this.listRepository.save(createDto);
+    return list;
+  }
+
+  async update(id: number, updateDto: UpdateListDto): Promise<ListEntity> {
+    const list = await this.listRepository.findOne({ id });
+    if (!list) throw new NotFoundException();
+    return this.listRepository.save({ ...list, ...updateDto });
   }
 }

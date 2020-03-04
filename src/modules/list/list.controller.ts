@@ -1,8 +1,8 @@
-import { Controller, Post, Get, Param, Body, Query } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, Query, Put } from '@nestjs/common';
 
 import { ListService } from './list.service';
 import { ListEntity } from './list.entity';
-import { CreateListDto } from './dto';
+import { CreateListDto, UpdateListDto } from './dto';
 
 import { ListQueryDto, ListDto } from '../shared/dto';
 
@@ -23,5 +23,10 @@ export class ListController {
   @Post('/')
   create(@Body() createDto: CreateListDto): Promise<ListEntity> {
     return this.listService.create(createDto);
+  }
+
+  @Put('/:id')
+  update(@Param('id') id: number, @Body() updateDto: UpdateListDto): Promise<ListEntity> {
+    return this.listService.update(id, updateDto);
   }
 }

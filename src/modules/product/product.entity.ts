@@ -1,24 +1,27 @@
-import { Column, Entity, ManyToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 
 import { BaseEntity } from '../shared/entities';
-import { ListEntity } from '../list/list.entity';
 import { CategoryEntity } from '../category/category.entity';
+import { ItemEntity } from '../list/item.entity';
 
 @Entity({ name: 'products' })
 export class ProductEntity extends BaseEntity {
   @Column('varchar')
   name: string;
 
-  @ManyToMany(
-    () => ListEntity,
-    list => list.products
-  )
-  lists: ListEntity[];
+  @Column('varchar')
+  unit: string;
+
+  @Column({ name: 'category_id', nullable: true })
+  categoryId?: number;
 
   @ManyToOne(() => CategoryEntity)
   @JoinColumn({ name: 'category_id' })
   category: CategoryEntity;
 
-  @Column({ name: 'category_id', nullable: true })
-  categoryId?: number;
+  @OneToMany(
+    () => ItemEntity,
+    item => item.product
+  )
+  items: ItemEntity[];
 }
