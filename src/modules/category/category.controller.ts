@@ -1,7 +1,7 @@
-import { Controller, Post, Get, Param, Body, Query } from '@nestjs/common';
+import { Post, Get, Param, Body, Query, Put, Delete, Controller } from '@nestjs/common';
 
-import { CategoryService } from './category.service';
 import { CategoryEntity } from './category.entity';
+import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto';
 
 import { ListQueryDto, ListDto } from '../shared/dto';
@@ -23,5 +23,15 @@ export class CategoryController {
   @Post('/')
   create(@Body() createDto: CreateCategoryDto): Promise<CategoryEntity> {
     return this.categoryService.create(createDto);
+  }
+
+  @Put('/:id')
+  update(@Param('id') id: number, @Body() updateDto: CreateCategoryDto): Promise<CategoryEntity> {
+    return this.categoryService.update(id, updateDto);
+  }
+
+  @Delete('/:id')
+  delete(@Param('id') id: number): Promise<boolean> {
+    return this.categoryService.destroy(id);
   }
 }

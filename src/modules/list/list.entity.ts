@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 
-import { BaseEntity } from '../shared/entities';
 import { ItemEntity } from './item.entity';
+import { BaseEntity } from '../shared/entities';
 
 @Entity({ name: 'lists' })
 export class ListEntity extends BaseEntity {

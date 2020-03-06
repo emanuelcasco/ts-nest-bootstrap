@@ -1,8 +1,8 @@
 import { Column, Entity, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 
 import { BaseEntity } from '../shared/entities';
-import { CategoryEntity } from '../category/category.entity';
 import { ItemEntity } from '../list/item.entity';
+import { CategoryEntity } from '../category/category.entity';
 
 @Entity({ name: 'products' })
 export class ProductEntity extends BaseEntity {

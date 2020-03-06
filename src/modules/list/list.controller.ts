@@ -1,7 +1,7 @@
-import { Controller, Post, Get, Param, Body, Query, Put } from '@nestjs/common';
+import { Post, Get, Param, Body, Query, Put, Delete, Controller } from '@nestjs/common';
 
-import { ListService } from './list.service';
 import { ListEntity } from './list.entity';
+import { ListService } from './list.service';
 import { CreateListDto, UpdateListDto } from './dto';
 
 import { ListQueryDto, ListDto } from '../shared/dto';
@@ -28,5 +28,10 @@ export class ListController {
   @Put('/:id')
   update(@Param('id') id: number, @Body() updateDto: UpdateListDto): Promise<ListEntity> {
     return this.listService.update(id, updateDto);
+  }
+
+  @Delete('/:id')
+  delete(@Param('id') id: number): Promise<boolean> {
+    return this.listService.destroy(id);
   }
 }

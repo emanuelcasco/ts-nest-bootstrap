@@ -1,7 +1,7 @@
-import { Controller, Post, Get, Param, Body, Query } from '@nestjs/common';
+import { Post, Get, Param, Body, Query, Put, Delete, Controller } from '@nestjs/common';
 
-import { ProductService } from './product.service';
 import { ProductEntity } from './product.entity';
+import { ProductService } from './product.service';
 import { CreateProductDto } from './dto';
 
 import { ListQueryDto, ListDto } from '../shared/dto';
@@ -23,5 +23,15 @@ export class ProductController {
   @Post('/')
   create(@Body() createDto: CreateProductDto): Promise<ProductEntity> {
     return this.productService.create(createDto);
+  }
+
+  @Put('/:id')
+  update(@Param('id') id: number, @Body() updateDto: CreateProductDto): Promise<ProductEntity> {
+    return this.productService.update(id, updateDto);
+  }
+
+  @Delete('/:id')
+  delete(@Param('id') id: number): Promise<boolean> {
+    return this.productService.destroy(id);
   }
 }
