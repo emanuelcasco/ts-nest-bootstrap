@@ -1,23 +1,30 @@
 import { Column, Entity, ManyToOne, JoinColumn } from 'typeorm';
+import { Field, Int, ObjectType } from 'type-graphql';
 
 import { BaseEntity } from '../shared/entities';
 import { ListEntity } from './list.entity';
 import { ProductEntity } from '../product/product.entity';
 
+@ObjectType()
 @Entity({ name: 'items' })
 export class ItemEntity extends BaseEntity {
+  @Field(() => Int)
   @Column()
   quantity: number;
 
+  @Field()
   @Column({ nullable: true })
   notes: string;
 
+  @Field(() => Int)
   @Column({ name: 'product_id' })
-  productId: string;
+  productId: number;
 
+  @Field(() => Int)
   @Column({ name: 'list_id' })
   listId: string;
 
+  @Field(() => ProductEntity)
   @ManyToOne(
     () => ProductEntity,
     product => product.items,
@@ -26,6 +33,7 @@ export class ItemEntity extends BaseEntity {
   @JoinColumn({ name: 'product_id' })
   product: ProductEntity;
 
+  @Field(() => ListEntity)
   @ManyToOne(
     () => ListEntity,
     list => list.items,

@@ -34,6 +34,8 @@ const getErrorMessage = (details: ValidationError[] | string): CustomBadRequestE
 @Catch()
 export class HttpErrorFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost): Response {
+    Logger.error(exception);
+
     const ctx = host.switchToHttp();
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
@@ -45,7 +47,7 @@ export class HttpErrorFilter implements ExceptionFilter {
       details: getErrorMessage(exception?.message?.message)
     };
     Logger.error(
-      `${request.method} ${request.url}`,
+      `${request?.method} ${request?.url}`,
       status === HttpStatus.INTERNAL_SERVER_ERROR ? exception.stack : JSON.stringify(errorResponse),
       'ExceptionFilter'
     );

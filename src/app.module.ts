@@ -1,6 +1,7 @@
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
 
 import { HttpErrorFilter } from './modules/shared/filters';
 import { LoggingInterceptor } from './modules/shared/interceptors';
@@ -18,6 +19,9 @@ import databaseConfig from './config/db';
   imports: [
     TypeOrmModule.forRootAsync({
       useFactory: () => databaseConfig
+    }),
+    GraphQLModule.forRoot({
+      autoSchemaFile: true
     }),
     CategoryModule,
     ProductModule,
