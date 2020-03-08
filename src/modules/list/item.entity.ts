@@ -9,12 +9,12 @@ import { ProductEntity } from '../product/product.entity';
 @Entity({ name: 'items' })
 export class ItemEntity extends BaseEntity {
   @Field(() => Int)
-  @Column()
-  quantity: number;
+  @Column({ nullable: true })
+  quantity?: number;
 
   @Field()
   @Column({ nullable: true })
-  notes: string;
+  notes?: string;
 
   @Field(() => Int)
   @Column({ name: 'product_id' })
@@ -22,7 +22,7 @@ export class ItemEntity extends BaseEntity {
 
   @Field(() => Int)
   @Column({ name: 'list_id' })
-  listId: string;
+  listId: number;
 
   @Field(() => ProductEntity)
   @ManyToOne(
@@ -31,7 +31,7 @@ export class ItemEntity extends BaseEntity {
     { primary: true, cascade: true }
   )
   @JoinColumn({ name: 'product_id' })
-  product: ProductEntity;
+  product?: ProductEntity;
 
   @Field(() => ListEntity)
   @ManyToOne(
@@ -40,5 +40,5 @@ export class ItemEntity extends BaseEntity {
     { primary: true }
   )
   @JoinColumn({ name: 'list_id' })
-  list: ListEntity;
+  list?: ListEntity;
 }

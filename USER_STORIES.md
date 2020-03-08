@@ -1,24 +1,28 @@
 
 # User stories
 
+- User
+  - Read element        [x]
+  - Signup              [x]
+  - Login               [x]
 - Categories
-  - List element        [ ]
-  - Create element      [ ]
-  - Read element        [ ]
-  - Update element      [ ]
-  - Delete element      [ ]
+  - List element        [x]
+  - Create element      [x]
+  - Read element        [x]
+  - Update element      [x]
+  - Delete element      [x]
 - Products
-  - List element        [ ]
-  - Create element      [ ]
-  - Read element        [ ]
-  - Update element      [ ]
-  - Delete element      [ ]
+  - List element        [x]
+  - Create element      [x]
+  - Read element        [x]
+  - Update element      [x]
+  - Delete element      [x]
 - List
-  - List element        [ ]
-  - Create element      [ ]
-  - Read element        [ ]
-  - Update element      [ ]
-  - Delete element      [ ]
+  - List element        [x]
+  - Create element      [x]
+  - Read element        [x]
+  - Update element      [x]
+  - Delete element      [x]
   - Add/Remove products [ ]
   - Init purchase       [ ]
   - Pause purchase      [ ]

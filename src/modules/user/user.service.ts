@@ -21,6 +21,7 @@ export class UserService {
   async findById(findDto: FindUserDto): Promise<UserEntity> {
     const user = await this.userRespository.findOne({ where: findDto });
     if (!user) throw new NotFoundException();
+    delete user.password;
     return user;
   }
 
@@ -41,6 +42,7 @@ export class UserService {
     if (!passwordValidated) throw new UnauthorizedException('E-mail/password is invalid');
 
     // Return encoded user info
+    delete user.password;
     return this.jwtService.encode(user);
   }
 

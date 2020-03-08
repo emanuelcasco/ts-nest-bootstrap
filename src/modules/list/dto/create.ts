@@ -1,8 +1,10 @@
-import { IsString, IsNotEmpty, Allow } from 'class-validator';
+import { IsString, IsNotEmpty, IsArray, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+
+import { CreateProductDto } from '../../product/dto';
 
 export class CreateListDto {
   @IsString() @IsNotEmpty() name: string;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @Allow() listConnection?: any[];
+  @IsArray() @ValidateNested() @Type(() => CreateProductDto) products?: CreateProductDto[];
 }

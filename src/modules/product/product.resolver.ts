@@ -8,7 +8,7 @@ export class ProductResolver {
   constructor(private readonly productService: ProductService) {}
 
   @Query(() => String)
-  helloProduct(): string {
-    return 'hello';
+  productHealth(): string {
+    return 'ping!';
   }
 }

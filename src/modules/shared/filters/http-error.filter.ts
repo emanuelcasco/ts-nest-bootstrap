@@ -18,7 +18,7 @@ interface CustomBadRequestError {
 const getConstraints = (error: ValidationError): CustomBadRequestError => ({
   field: error.property,
   errors: error.constraints,
-  children: error.children.map(getConstraints)
+  children: error.children?.map(getConstraints)
 });
 
 const getErrorMessage = (details: ValidationError[] | string): CustomBadRequestError[] | string => {

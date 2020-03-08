@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, FindOneOptions } from 'typeorm';
 
 import { ListQueryDto, ListDto } from '../dto';
 import { BaseEntity } from '../entities';
@@ -15,8 +15,8 @@ export class CrudService<Entity extends BaseEntity> {
     return { records, count, page, limit: take };
   }
 
-  async findOneBy<T>(findDto: T): Promise<Entity> {
-    const product = await this.repository.findOne({ where: findDto });
+  async findOneBy<T>(findDto: T, options: FindOneOptions<Entity> = {}): Promise<Entity> {
+    const product = await this.repository.findOne(findDto, options);
     if (!product) throw new NotFoundException();
     return product;
   }
@@ -27,15 +27,13 @@ export class CrudService<Entity extends BaseEntity> {
   }
 
   async update<T>(id: number, updateDto: T): Promise<Entity> {
-    const element = await this.repository.findOne({ where: { id } });
-    if (!element) throw new NotFoundException();
+    const element = await this.findOneBy(id);
     return this.repository.save({ ...element, ...updateDto });
   }
 
   async destroy(id: number): Promise<boolean> {
-    const element = await this.repository.findOne({ where: { id } });
-    if (!element) throw new NotFoundException();
-    const result = await this.repository.delete(id);
+    const element = await this.findOneBy(id);
+    const result = await this.repository.delete(element.id);
     return !!result?.affected;
   }
 }
