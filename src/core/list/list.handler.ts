@@ -48,7 +48,7 @@ export class ListHandler {
   }
 
   @Get('/:listId/item/:itemId')
-  @GraphqlMutation(() => ItemEntity)
+  @GraphqlQuery(() => ItemEntity)
   listItem(
     @Args('listId') @Param('listId') listId: number,
     @Args('itemId') @Param('itemId') itemId: number
@@ -57,9 +57,9 @@ export class ListHandler {
   }
 
   @Get('/:id/item')
-  @GraphqlMutation(() => [ItemEntity])
-  listItems(@Args('id') @Param('id') id: number): Promise<ItemEntity[]> {
-    return this.listService.listItems(id);
+  @GraphqlQuery(() => [ItemEntity])
+  listItems(@Args('listId') @Param('listId') listId: number): Promise<ItemEntity[]> {
+    return this.listService.listItems(listId);
   }
 
   @Post('/:id/item')

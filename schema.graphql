@@ -65,8 +65,6 @@ type Mutation {
   createList(list: CreateListDto!): ListEntity!
   updateList(list: UpdateListDto!, id: Float!): ListEntity!
   deleteList(id: Float!): Boolean!
-  listItem(itemId: Float!, listId: Float!): ItemEntity!
-  listItems(id: Float!): [ItemEntity!]!
   addItemToList(id: Float!): ListEntity!
   removeItemFromList(itemId: Float!, listId: Float!): ListEntity!
 }
@@ -110,6 +108,8 @@ type Query {
   category(id: Float!): CategoryEntity!
   lists: PaginatedListsDto!
   list(id: Float!): ListEntity!
+  listItem(itemId: Float!, listId: Float!): ItemEntity!
+  listItems(listId: Float!): [ItemEntity!]!
 }
 
 input UpdateListDto {

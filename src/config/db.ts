@@ -8,9 +8,9 @@ const generatePath = (pathToResolve: string): string => path.join(__dirname, pat
 
 const typeOrmConfig = {
   ...config.database,
-  entities: [generatePath('../modules/**/*.entity.{js,ts}')],
+  entities: [generatePath('../core/**/*.entity.{js,ts}')],
   migrations: [generatePath('../migrations/migrations/*.{js,ts}')],
-  subscribers: [generatePath('../modules/**/*.subscriber.{js,ts}')],
+  subscribers: [generatePath('../core/**/*.subscriber.{js,ts}')],
   cli: { migrationsDir: generatePath('../migrations/migrations') }
 } as ConnectionOptions;
 

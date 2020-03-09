@@ -3,15 +3,15 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 
-import { HttpErrorFilter } from './modules/shared/filters';
-import { LoggingInterceptor } from './modules/shared/interceptors';
+import { HttpErrorFilter } from './core/shared/filters';
+import { LoggingInterceptor } from './core/shared/interceptors';
 
-import { HealthModule } from './modules/health/health.module';
-import { ProductModule } from './modules/product/product.module';
-import { CategoryModule } from './modules/category/category.module';
-import { ListModule } from './modules/list/list.module';
-import { TodoModule } from './modules/todo/todo.module';
-import { UserModule } from './modules/user/user.module';
+import { HealthModule } from './core/health/health.module';
+import { ProductModule } from './core/product/product.module';
+import { CategoryModule } from './core/category/category.module';
+import { ListModule } from './core/list/list.module';
+import { TodoModule } from './core/todo/todo.module';
+import { UserModule } from './core/user/user.module';
 
 import databaseConfig from './config/db';
 
