@@ -1,10 +1,7 @@
-import { IsString, IsNotEmpty, IsArray, ValidateNested } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsString, IsNotEmpty } from 'class-validator';
+import { InputType, Field } from 'type-graphql';
 
-import { CreateProductDto } from '../../product/dto';
-
+@InputType()
 export class CreateListDto {
-  @IsString() @IsNotEmpty() name: string;
-
-  @IsArray() @ValidateNested() @Type(() => CreateProductDto) products?: CreateProductDto[];
+  @Field() @IsString() @IsNotEmpty() name: string;
 }

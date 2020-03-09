@@ -1,10 +1,7 @@
-import { Type } from 'class-transformer';
-import { IsString, ValidateNested, IsArray, IsOptional } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
+import { InputType, Field } from 'type-graphql';
 
-import { CreateProductDto } from '../../product/dto';
-
+@InputType()
 export class UpdateListDto {
-  @IsString() @IsOptional() name?: string;
-
-  @IsArray() @IsOptional() @ValidateNested() @Type(() => CreateProductDto) products?: CreateProductDto[];
+  @Field() @IsString() @IsOptional() name?: string;
 }

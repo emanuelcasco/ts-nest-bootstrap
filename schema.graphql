@@ -16,6 +16,14 @@ type CategoryEntity {
   name: String!
 }
 
+input CreateCategoryDto {
+  name: String!
+}
+
+input CreateListDto {
+  name: String!
+}
+
 input CreateProductDto {
   name: String!
   unit: String!
@@ -51,6 +59,16 @@ type Mutation {
   createProduct(product: CreateProductDto!): ProductEntity!
   updateProduct: ProductEntity!
   deleteProduct: Boolean!
+  createCategory(category: CreateCategoryDto!): CategoryEntity!
+  updateCategory(category: CreateCategoryDto!, id: Float!): CategoryEntity!
+  deleteCategory(id: Float!): Boolean!
+  createList(list: CreateListDto!): ListEntity!
+  updateList(list: UpdateListDto!, id: Float!): ListEntity!
+  deleteList(id: Float!): Boolean!
+  listItem(itemId: Float!, listId: Float!): ItemEntity!
+  listItems(id: Float!): [ItemEntity!]!
+  addItemToList(id: Float!): ListEntity!
+  removeItemFromList(itemId: Float!, listId: Float!): ListEntity!
 }
 
 type PaginatedCategoriesDto {
@@ -86,7 +104,14 @@ type ProductEntity {
 }
 
 type Query {
-  productHealth: String!
   products: PaginatedProductsDto!
   product(id: Float!): ProductEntity!
+  categories: PaginatedCategoriesDto!
+  category(id: Float!): CategoryEntity!
+  lists: PaginatedListsDto!
+  list(id: Float!): ListEntity!
+}
+
+input UpdateListDto {
+  name: String!
 }

@@ -11,7 +11,7 @@ export class CrudService<Entity extends BaseEntity> {
 
   async findAndCount(query: ListQueryDto): Promise<GenericListDto<Entity>> {
     const { skip, take, page } = paginateParams(query);
-    const [records, count] = await this.repository.findAndCount({ skip, take });
+    const [records, count] = await this.repository.findAndCount({ skip, take, order: { createdAt: 'ASC' } });
     return { records, count, page, limit: take };
   }
 

@@ -8,15 +8,10 @@ import { CreateProductDto, PaginatedProductsDto } from './dto';
 
 import { ListQueryDto } from '../shared/dto';
 
-@Resolver(ProductEntity)
 @Controller('product')
+@Resolver(ProductEntity)
 export class ProductHandler {
   constructor(private readonly productService: ProductService) {}
-
-  @GraphqlQuery(() => String)
-  productHealth(): string {
-    return 'ping!';
-  }
 
   @Get()
   @GraphqlQuery(() => PaginatedProductsDto)
@@ -32,7 +27,7 @@ export class ProductHandler {
 
   @Post('/')
   @GraphqlMutation(() => ProductEntity)
-  createProduct(@Body('product') @Args('product') product: CreateProductDto): Promise<ProductEntity> {
+  createProduct(@Args('product') @Body('product') product: CreateProductDto): Promise<ProductEntity> {
     return this.productService.create(product);
   }
 
