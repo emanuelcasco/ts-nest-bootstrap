@@ -21,7 +21,7 @@ import databaseConfig from './config/db';
       useFactory: () => databaseConfig
     }),
     GraphQLModule.forRoot({
-      autoSchemaFile: true
+      autoSchemaFile: 'schema.graphql'
     }),
     CategoryModule,
     ProductModule,

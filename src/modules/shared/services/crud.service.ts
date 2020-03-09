@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository, FindOneOptions } from 'typeorm';
 
-import { ListQueryDto, ListDto } from '../dto';
+import { ListQueryDto, GenericListDto } from '../dto';
 import { BaseEntity } from '../entities';
 import { paginateParams } from '../helpers';
 
@@ -9,8 +9,8 @@ import { paginateParams } from '../helpers';
 export class CrudService<Entity extends BaseEntity> {
   constructor(private readonly repository: Repository<Entity>) {}
 
-  async findAndCount(query: ListQueryDto): Promise<ListDto<Entity>> {
-    const { skip, take, page } = paginateParams(query.page, query.limit);
+  async findAndCount(query: ListQueryDto): Promise<GenericListDto<Entity>> {
+    const { skip, take, page } = paginateParams(query);
     const [records, count] = await this.repository.findAndCount({ skip, take });
     return { records, count, page, limit: take };
   }

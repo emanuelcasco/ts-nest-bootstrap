@@ -1,3 +1,4 @@
+export * from './paginated';
 export * from './saveItem';
 export * from './deleteItem';
 export * from './find';

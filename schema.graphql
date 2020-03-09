@@ -3,11 +3,34 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type BaseEntity {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type CategoryEntity {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
 }
 
+input CreateProductDto {
+  name: String!
+  unit: String!
+  categoryId: Int!
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
 type ItemEntity {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   quantity: Int!
   notes: String!
   productId: Int!
@@ -17,11 +40,44 @@ type ItemEntity {
 }
 
 type ListEntity {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
   items: [ItemEntity!]!
 }
 
+type Mutation {
+  createProduct(product: CreateProductDto!): ProductEntity!
+  updateProduct: ProductEntity!
+  deleteProduct: Boolean!
+}
+
+type PaginatedCategoriesDto {
+  records: [CategoryEntity!]!
+  page: Int!
+  limit: Int!
+  count: Int!
+}
+
+type PaginatedListsDto {
+  records: [ListEntity!]!
+  page: Int!
+  limit: Int!
+  count: Int!
+}
+
+type PaginatedProductsDto {
+  records: [ProductEntity!]!
+  page: Int!
+  limit: Int!
+  count: Int!
+}
+
 type ProductEntity {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
   unit: String!
   categoryId: Int!
@@ -30,5 +86,7 @@ type ProductEntity {
 }
 
 type Query {
-  helloProduct: String!
+  productHealth: String!
+  products: PaginatedProductsDto!
+  product(id: Float!): ProductEntity!
 }

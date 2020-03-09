@@ -1,18 +1,18 @@
 import { Post, Get, Param, Body, Query, Put, Delete, Controller } from '@nestjs/common';
 
 import { ListEntity } from './list.entity';
-import { ListService } from './list.service';
-import { CreateListDto, UpdateListDto, SaveItemDto } from './dto';
-
-import { ListQueryDto, ListDto } from '../shared/dto';
 import { ItemEntity } from './item.entity';
+import { ListService } from './list.service';
+import { CreateListDto, UpdateListDto, SaveItemDto, PaginatedListsDto } from './dto';
+
+import { ListQueryDto } from '../shared/dto';
 
 @Controller('list')
 export class ListController {
   constructor(private readonly listService: ListService) {}
 
   @Get()
-  findAndCountAll(@Query() queryparams: ListQueryDto): Promise<ListDto<ListEntity>> {
+  findAndCountAll(@Query() queryparams: ListQueryDto): Promise<PaginatedListsDto> {
     return this.listService.findAndCount(queryparams);
   }
 

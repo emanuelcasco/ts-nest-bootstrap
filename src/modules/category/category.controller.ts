@@ -2,16 +2,16 @@ import { Post, Get, Param, Body, Query, Put, Delete, Controller } from '@nestjs/
 
 import { CategoryEntity } from './category.entity';
 import { CategoryService } from './category.service';
-import { CreateCategoryDto } from './dto';
+import { CreateCategoryDto, PaginatedCategoriesDto } from './dto';
 
-import { ListQueryDto, ListDto } from '../shared/dto';
+import { ListQueryDto } from '../shared/dto';
 
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
-  findAndCountAll(@Query() queryparams: ListQueryDto): Promise<ListDto<CategoryEntity>> {
+  findAndCountAll(@Query() queryparams: ListQueryDto): Promise<PaginatedCategoriesDto> {
     return this.categoryService.findAndCount(queryparams);
   }
 
