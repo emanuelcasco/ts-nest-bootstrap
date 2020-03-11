@@ -14,7 +14,7 @@ export class ListEntity extends BaseEntity {
   @Field(() => [ItemEntity])
   @OneToMany(
     () => ItemEntity,
-    item => item.list,
+    (item: ItemEntity) => item.list,
     { cascade: true }
   )
   items: ItemEntity[];

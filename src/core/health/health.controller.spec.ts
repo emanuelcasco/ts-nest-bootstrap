@@ -13,7 +13,7 @@ describe('AppController', () => {
   });
 
   describe('getHealth', () => {
-    it('should return ', async done => {
+    it('should return ', async (done: jest.DoneCallback) => {
       const healthController = app.get<HealthController>(HealthController);
       const response = await healthController.getUptime();
       expect(response).toBeInstanceOf(Object);

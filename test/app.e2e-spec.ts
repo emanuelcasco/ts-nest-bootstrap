@@ -15,7 +15,7 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/health (GET)', async done => {
+  it('/health (GET)', async (done: jest.DoneCallback) => {
     const response = await request(app.getHttpServer()).get('/health');
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Object);

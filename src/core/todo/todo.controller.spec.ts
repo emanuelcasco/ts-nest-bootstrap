@@ -13,7 +13,7 @@ describe('AppController', () => {
   });
 
   describe('Todo::findAll', () => {
-    it('should return ', async done => {
+    it('should return ', async (done: jest.DoneCallback) => {
       const todoController = app.get<TodoController>(TodoController);
       const response = await todoController.findAll();
       expect(response).toBeInstanceOf(Array);
@@ -27,7 +27,7 @@ describe('AppController', () => {
   });
 
   describe('Todo::findById', () => {
-    it('should return ', async done => {
+    it('should return ', async (done: jest.DoneCallback) => {
       const todoController = app.get<TodoController>(TodoController);
       const response = await todoController.findById(1);
       expect(response).toBeInstanceOf(Object);

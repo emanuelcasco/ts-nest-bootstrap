@@ -27,7 +27,7 @@ export class ItemEntity extends BaseEntity {
   @Field(() => ProductEntity)
   @ManyToOne(
     () => ProductEntity,
-    product => product.items,
+    (product: ProductEntity) => product.items,
     { primary: true, cascade: true }
   )
   @JoinColumn({ name: 'product_id' })
@@ -36,7 +36,7 @@ export class ItemEntity extends BaseEntity {
   @Field(() => ListEntity)
   @ManyToOne(
     () => ListEntity,
-    list => list.items,
+    (list: ListEntity) => list.items,
     { primary: true }
   )
   @JoinColumn({ name: 'list_id' })

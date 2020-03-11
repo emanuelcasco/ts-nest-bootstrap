@@ -28,7 +28,7 @@ export class ProductEntity extends BaseEntity {
   @Field(() => [ItemEntity])
   @OneToMany(
     () => ItemEntity,
-    item => item.product
+    (item: ItemEntity) => item.product
   )
   items: ItemEntity[];
 }

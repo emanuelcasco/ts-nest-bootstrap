@@ -76,7 +76,7 @@ module.exports = {
     "@typescript-eslint/semi": "error",
     "@typescript-eslint/type-annotation-spacing": "error",
     "@typescript-eslint/restrict-plus-operands": "error",
-    // "@typescript-eslint/typedef": "error",
+    "@typescript-eslint/typedef": "error",
     "@typescript-eslint/unbound-method": "error"
   }
 };
