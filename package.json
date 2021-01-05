@@ -33,7 +33,7 @@
     "@nestjs/typeorm": "^6.3.3",
     "@types/bcryptjs": "^2.4.2",
     "apollo-server-express": "^2.11.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.11.0",
